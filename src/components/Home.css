@@ -10,7 +10,7 @@
 .home-logo {
   width: 220px;
   position: absolute;
-  top: 80px;
+  top: 120px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -19,7 +19,7 @@
 
 .home-slogan {
   position: absolute;
-  top: 150px;
+  top: 120px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Roboto Condensed', sans-serif;

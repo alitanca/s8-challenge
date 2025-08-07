@@ -2,17 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./OrderPizza.css";
-import logo from "/src/components/images/iteration-1-images/logo.svg";
-
-
+import logo from "../components/images/iteration-1-images/logo.svg";
 
 export default function OrderPizza() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    isim: "",
     boyut: "",
     malzemeler: [],
-    özel: ""
+    özel: "",
   });
   const [hata, setHata] = useState("");
 
@@ -34,7 +31,6 @@ export default function OrderPizza() {
   };
 
   const formGecerliMi =
-    formData.isim.length >= 3 &&
     formData.boyut &&
     formData.malzemeler.length >= 4 &&
     formData.malzemeler.length <= 10;
@@ -49,93 +45,78 @@ export default function OrderPizza() {
           "x-api-key": "reqres-free-v1"
         }
       })
-      .then((res) => {
-        console.log("Sipariş Yanıtı:", res.data);
-        navigate("/success");
-      })
-      .catch((err) => {
-        console.error("Hata:", err);
-        setHata("Sipariş gönderilirken bir hata oluştu.");
-      });
+      .then(() => navigate("/success"))
+      .catch(() => setHata("Sipariş gönderilirken bir hata oluştu."));
   };
 
   return (
-    <form className="order-form red-theme" onSubmit={handleSubmit}>
-      <div className="logo-container">
+    <>
+      <header className="order-header">
         <img src={logo} alt="Teknolojik Yemekler Logo" />
-      </div>
+      </header>
 
-      <h2>Pizza Siparişini Hazırla</h2>
+      <form className="order-form" onSubmit={handleSubmit}>
+        <h2>Position Absolute Pizza</h2>
 
-      <label htmlFor="isim">
-        İsim:
-        <input
-          id="isim"
-          type="text"
-          name="isim"
-          value={formData.isim}
-          onChange={handleChange}
-          placeholder="Adınızı yazın"
-        />
-        {formData.isim.length > 0 && formData.isim.length < 3 && (
-          <p className="error-text">En az 3 karakter gerekli.</p>
-        )}
-      </label>
+        <div className="pizza-info-row">
+          <div className="pizza-price">85.50₺</div>
+          <div className="pizza-rating">⭐ 4.9 (200)</div>
+        </div>
 
-      <label>Boyut Seçin:</label>
-      <div className="radio-group">
-        {["Küçük", "Orta", "Büyük"].map((boyut) => (
-          <label key={boyut}>
-            <input
-              type="radio"
-              name="boyut"
-              value={boyut}
-              checked={formData.boyut === boyut}
-              onChange={handleChange}
-            />
-            {boyut}
-          </label>
-        ))}
-      </div>
+        <p className="pizza-description">
+          Frontend Dev olarak hâlâ position:absolute kullanıyorsan bu çok acı pizza tam sana göre.
+          Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.
+        </p>
 
-      <label>Malzemeler (4–10 seçin):</label>
-      <div className="malzemeler-grid">
-        {malzemeListesi.map((m) => (
-          <label key={m}>
-            <input
-              type="checkbox"
-              name="malzemeler"
-              value={m}
-              checked={formData.malzemeler.includes(m)}
-              onChange={handleChange}
-            />
-            {m}
-          </label>
-        ))}
-      </div>
-      {formData.malzemeler.length < 4 && (
-        <p className="error-text">En az 4 malzeme seçmelisiniz.</p>
-      )}
-      {formData.malzemeler.length > 10 && (
-        <p className="error-text">En fazla 10 malzeme seçebilirsiniz.</p>
-      )}
+        <label>Boyut Seçin:</label>
+        <div className="radio-group">
+          {["Küçük", "Orta", "Büyük"].map((boyut) => (
+            <label key={boyut}>
+              <input
+                type="radio"
+                name="boyut"
+                value={boyut}
+                checked={formData.boyut === boyut}
+                onChange={handleChange}
+              />
+              {boyut}
+            </label>
+          ))}
+        </div>
 
-      <label htmlFor="özel">
-        Ek Not:
-        <textarea
-          id="özel"
-          name="özel"
-          value={formData.özel}
-          onChange={handleChange}
-          placeholder="Özel istek varsa giriniz"
-        />
-      </label>
+        <label>Malzemeler (4–10 seçin):</label>
+        <div className="malzemeler-grid">
+          {malzemeListesi.map((m) => (
+            <label key={m}>
+              <input
+                type="checkbox"
+                name="malzemeler"
+                value={m}
+                checked={formData.malzemeler.includes(m)}
+                onChange={handleChange}
+              />
+              {m}
+            </label>
+          ))}
+        </div>
 
-      {hata && <p className="error-text">{hata}</p>}
+        <label htmlFor="özel">
+          Ek Not:
+          <textarea
+            id="özel"
+            name="özel"
+            value={formData.özel}
+            onChange={handleChange}
+            placeholder="Özel istek varsa giriniz"
+          />
+        </label>
 
-      <button type="submit" disabled={!formGecerliMi}>
-        Sipariş Ver
-      </button>
-    </form>
+        {hata && <p className="error-text">{hata}</p>}
+
+        <button type="submit" disabled={!formGecerliMi}>
+          Sipariş Ver
+        </button>
+      </form>
+    </>
   );
 }

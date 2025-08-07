@@ -1,101 +1,155 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
-.order-form {
-  background-color: #FAF7F2;
-  padding: 2.5rem;
-  max-width: 700px;
-  margin: 2rem auto;
-  border-radius: 10px;
+.order-container {
   font-family: 'Roboto Condensed', sans-serif;
+  background-color: #FAF7F2;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  position: relative;
 }
 
-.red-theme h2 {
-  color: #CE2829;
-  text-align: center;
+.pizza-description {
+  color: #292929;
+  font-size: 0.95rem;
+  line-height: 1.6;
   margin-bottom: 1.5rem;
+  text-align: left;
 }
 
-.logo-container {
-  position: absolute;
-  top: -40px;
-  left: calc(50% - 40px);
+
+.order-header {
+  background-color: #CE2829;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.order-header img {
+  height: 80px;
+}
+
+.order-form {
+  max-width: 750px;
+  margin: -3rem auto 0 auto;
   background: white;
-  border-radius: 50%;
-  padding: 0.5rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
 }
 
-.logo-container img {
-  width: 80px;
-  height: auto;
+.order-form h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #292929;
 }
 
 .order-form label {
   display: block;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
   color: #5F5F5F;
   font-weight: bold;
 }
 
 .order-form input[type="text"],
+.order-form select,
 .order-form textarea {
   width: 100%;
-  padding: 8px;
-  margin-top: 0.25rem;
+  padding: 10px;
+  margin-top: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-.radio-group {
+.dropdown-group {
   display: flex;
   gap: 1rem;
-  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.malzeme-grubu p {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.malzeme-grubu small {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 1rem;
+  display: block;
 }
 
 .malzemeler-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
+  gap: 1rem;
 }
 
 .malzemeler-grid label {
+  background: #fff;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
-.order-form button {
-  width: 100%;
-  padding: 0.9rem;
-  background-color: #CE2829;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.05rem;
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.fiyat-bilgi {
+  color: #5F5F5F;
   font-weight: bold;
-  margin-top: 1.5rem;
+}
+
+button[type="submit"] {
+  background-color: #FDC913;
+  color: #292929;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.order-form button:hover:enabled {
-  background-color: #a91e21;
-}
-
-.order-form button:disabled {
-  background-color: #ccc;
+button[disabled] {
+  background-color: #ddd;
   cursor: not-allowed;
 }
 
 .error-text {
   color: #CE2829;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   margin-top: 0.25rem;
+}
+
+.pizza-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  margin-top: -1rem;
+}
+
+.pizza-price {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.pizza-rating {
+  font-size: 1rem;
+  color: #5F5F5F;
+  font-weight: 500;
 }
