@@ -1,20 +1,19 @@
-// src/App.jsx
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./components/Home";
 import OrderPizza from "./components/OrderPizza";
 import Success from "./components/Success";
 
-function App() {
+export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/order-pizza" element={<OrderPizza />} />
         <Route path="/success" element={<Success />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
-
-export default App;
-

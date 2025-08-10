@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
-/* LOGO */
+
 import logo from "../components/images/iteration-1-images/logo.svg";
 
-/* HERO arka plan pizza */
+
 import heroPizza from "../components/images/iteration-1-images/home-banner.png";
 
-/* KATEGORİ İKONLARI */
+
 import ico1 from "../components/images/iteration-2-images/icons/1.svg";
 import ico2 from "../components/images/iteration-2-images/icons/2.svg";
 import ico3 from "../components/images/iteration-2-images/icons/3.svg";
@@ -16,17 +16,17 @@ import ico4 from "../components/images/iteration-2-images/icons/4.svg";
 import ico5 from "../components/images/iteration-2-images/icons/5.svg";
 import ico6 from "../components/images/iteration-2-images/icons/6.svg";
 
-/* PROMO görselleri */
+
 import kart1 from "../components/images/iteration-2-images/cta/kart-1.png";
 import kart2 from "../components/images/iteration-2-images/cta/kart-2.png";
 import kart3 from "../components/images/iteration-2-images/cta/kart-3.png";
 
-/* POPÜLER kart görselleri */
+
 import food1 from "../components/images/iteration-2-images/pictures/food-1.png";
 import food2 from "../components/images/iteration-2-images/pictures/food-2.png";
 import food3 from "../components/images/iteration-2-images/pictures/food-3.png";
 
-/* FOOTER görselleri */
+
 import logoFooter from "../components/images/iteration-2-images/logo-footer.svg";
 import iconPhone from "../components/images/iteration-2-images/footer/icons/icon-1.png";
 import iconMail from "../components/images/iteration-2-images/footer/icons/icon-2.png";
@@ -41,7 +41,7 @@ import ig5 from "../components/images/iteration-2-images/footer/insta/li-5.png";
 export default function Home() {
   return (
     <div className="home">
-      {/* HERO */}
+
       <section className="hero">
         <div className="hero-inner">
           <img src={logo} className="hero-logo" alt="Teknolojik Yemekler" />
@@ -51,12 +51,12 @@ export default function Home() {
             <br />
             PIZZA, DOYURUR
           </h1>
-          <Link to="/order-pizza" className="hero-cta">AÇIKTIM</Link>
+          <Link to="/order-pizza" className="hero-cta">ACIKTIM</Link>
         </div>
         <img src={heroPizza} className="hero-pizza" alt="" aria-hidden="true" />
       </section>
 
-      {/* CATS */}
+
       <section className="cats">
         <div className="container cats-row">
           <button className="cat-pill"><img src={ico1} alt="" /><span>YENİ! Kore</span></button>
@@ -68,7 +68,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROMOS */}
       <section className="promos">
         <div className="container promos-grid">
           <Link to="/order-pizza" className="promo promo-big">
@@ -81,13 +80,13 @@ export default function Home() {
           </Link>
 
           <div className="promo-stack">
-            <Link to="/order-pizza" className="promo promo-dark">
+            <div className="promo promo-dark">
               <div className="promo-copy">
                 <h4>Hackathlon Burger Menü</h4>
                 <span className="promo-btn">SİPARİŞ VER</span>
               </div>
               <img src={kart2} alt="" className="promo-img" />
-            </Link>
+           </div>
 
             <Link to="/order-pizza" className="promo promo-beige">
               <div className="promo-copy">
@@ -100,7 +99,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* POPULAR */}
+
       <section className="popular">
         <div className="container">
           <p className="popular-eyebrow">en çok paketlenen menüler</p>
@@ -130,19 +129,20 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="card">
+            <Link to="/order-pizza" className="card">
               <div className="card-media">
                 <img src={food2} alt="Position Absolute Acı Pizza" />
               </div>
               <div className="card-body">
                 <h3>Position Absolute Acı Pizza</h3>
-                <div className="meta">
-                  <span>4.9</span>
-                  <span>(828)</span>
-                  <span className="price">85₺</span>
-                </div>
+              <div className="meta">
+                <span>4.9</span>
+                <span>(828)</span>
+                <span className="price">85₺</span>
               </div>
-            </div>
+              </div>
+            </Link>
+
 
             <div className="card">
               <div className="card-media">

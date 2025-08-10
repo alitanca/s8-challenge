@@ -110,12 +110,11 @@ a { color: inherit; text-decoration: none; }
 }
 .promos-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 20px;
-  padding: 28px 0;
-  justify-content: center;
+  grid-template-columns: max-content max-content; /* içerik kadar */
+  column-gap: 12px;            /* “neredeyse yok” boşluk için 8–12px ideal */
+  justify-content: center;     /* tüm paketi ortaya al */
   align-items: start;
-  margin: 0 auto;
+  padding: 28px 0;
 }
 
 .promo {
@@ -143,15 +142,11 @@ a { color: inherit; text-decoration: none; }
   max-width: fit-content;
 }
 
-/* Soldaki kare promo */
+
 .promo-big {
-  background: var(--brand);
-  height: calc(2 * 150px + 20px); 
-  width: 50%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  width: 400px;                
+  height: 314px;
+  justify-self: end;          
 }
 .promo-big h3 {
   font-size: 32px;
@@ -170,11 +165,11 @@ a { color: inherit; text-decoration: none; }
   z-index: 1;
 }
 
-/* Sağdaki iki promo */
 .promo-stack {
   display: grid;
-  gap: 10px;
-  height: 100%;
+  gap: 12px;
+  justify-self: start;        
+  width: 400px;          
 }
 .promo-dark, .promo-beige {
   height: 150px;
@@ -310,7 +305,7 @@ a { color: inherit; text-decoration: none; }
   padding: 28px 0;
 }
 .footer-logo {
-  width: 220px;
+  width: 125px;
   margin-bottom: 12px;
 }
 .contact-list {
@@ -348,10 +343,10 @@ a { color: inherit; text-decoration: none; }
 .ig-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  gap: 4px;
 }
 .ig-grid img {
-  width: 100%;
+  width: 72px;
   height: 72px;
   object-fit: cover;
   border-radius: 8px;
