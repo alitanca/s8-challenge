@@ -112,8 +112,8 @@ export default function OrderPizza() {
         <h2 className="pizza-title">Position Absolute Pizza</h2>
 
         <div className="pizza-info-row">
-          {/* Dinamik toplam fiyat */}
-          <div className="pizza-price">{toplamFiyat}₺</div>
+
+          <div className="pizza-price">85.50₺</div>
           <div className="pizza-rating">
             <span className="star">★</span> 4.9 <span className="muted">(200)</span>
           </div>
@@ -126,7 +126,7 @@ export default function OrderPizza() {
           buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.
         </p>
 
-        {/* Boyut (dikey) + Hamur (dropdown) aynı satır */}
+   
         <div className="field-row">
           <div className="field field--stack">
             <label className="field-label">Boyut Seçin</label>
