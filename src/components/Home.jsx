@@ -73,7 +73,7 @@ export default function Home() {
           <Link to="/order-pizza" className="promo promo-big">
             <div className="promo-copy">
               <h3>Özel<br />Lezzetus</h3>
-              <p>Position Absolute Acı Burger</p>
+              <p>Position Absolute Pizza</p>
               <span className="promo-btn">SİPARİŞ VER</span>
             </div>
             <img src={kart1} alt="" className="promo-img--left" />
