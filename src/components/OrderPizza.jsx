@@ -4,7 +4,7 @@ import axios from "axios";
 import "./OrderPizza.css";
 import logo from "../components/images/iteration-1-images/logo.svg";
 
-/* Footer görselleri (OrderPizza'da footer kullanıyoruz) */
+
 import logoFooter from "../components/images/iteration-2-images/logo-footer.svg";
 import iconPhone from "../components/images/iteration-2-images/footer/icons/icon-1.png";
 import iconMail from "../components/images/iteration-2-images/footer/icons/icon-2.png";
@@ -19,9 +19,9 @@ import ig5 from "../components/images/iteration-2-images/footer/insta/li-5.png";
 export default function OrderPizza() {
   const navigate = useNavigate();
 
-  // Fiyat sabitleri
-  const BASE_PRICE = 85.5;     // pizza taban fiyatı (tek adet)
-  const TOPPING_PRICE = 5;     // topping birim fiyatı (tek adet)
+ 
+  const BASE_PRICE = 85.5;     
+  const TOPPING_PRICE = 5;     
 
   const [formData, setFormData] = useState({
     boyut: "",
@@ -30,7 +30,7 @@ export default function OrderPizza() {
     özel: "",
   });
 
-  // Adet kontrolü
+
   const [adet, setAdet] = useState(1);
 
   const [hata, setHata] = useState("");
