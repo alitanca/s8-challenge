@@ -49,7 +49,7 @@ export default function Success() {
           </div>
         </div>
 
-        <Link to="/" className="home-link">Ana sayfa</Link>
+        <Link to="/" className="home-link">Ana sayfa'ya dönmek için tıkla</Link>
       </div>
     </div>
   );
