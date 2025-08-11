@@ -161,7 +161,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
+
       <footer className="site-footer">
         <div className="container footer-grid">
           <div className="f-brand">
