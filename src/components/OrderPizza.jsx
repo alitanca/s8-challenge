@@ -113,7 +113,7 @@ export default function OrderPizza() {
     [formData.malzemeler.length]
   );
 
-  // Ara hesaplar
+
   const pizzaTutari = useMemo(
     () => (BASE_PRICE * adet).toFixed(2),
     [adet]
@@ -132,7 +132,6 @@ export default function OrderPizza() {
 
   return (
     <div className="order-container">
-      {/* Kırmızı alan (logo + breadcrumb) */}
       <header className="order-header">
         <div className="order-header-inner">
           <img src={logo} alt="Teknolojik Yemekler Logo" className="logo" />
@@ -142,7 +141,6 @@ export default function OrderPizza() {
         </div>
       </header>
 
-      {/* Form */}
       <form className="order-form" onSubmit={handleSubmit}>
         <h2 className="pizza-title">Position Absolute Pizza</h2>
 
@@ -269,7 +267,7 @@ export default function OrderPizza() {
         </div>
       </form>
 
-      {/* FOOTER */}
+
       <footer className="site-footer">
         <div className="container footer-grid">
           <div className="f-brand">
