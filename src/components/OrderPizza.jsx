@@ -4,7 +4,7 @@ import axios from "axios";
 import "./OrderPizza.css";
 import logo from "../components/images/iteration-1-images/logo.svg";
 
-
+/* Footer görselleri (OrderPizza'da footer kullanıyoruz) */
 import logoFooter from "../components/images/iteration-2-images/logo-footer.svg";
 import iconPhone from "../components/images/iteration-2-images/footer/icons/icon-1.png";
 import iconMail from "../components/images/iteration-2-images/footer/icons/icon-2.png";
@@ -18,8 +18,10 @@ import ig5 from "../components/images/iteration-2-images/footer/insta/li-5.png";
 
 export default function OrderPizza() {
   const navigate = useNavigate();
-  const BASE_PRICE = 85.5;
-  const TOPPING_PRICE = 5;
+
+  // Fiyat sabitleri
+  const BASE_PRICE = 85.5;     // pizza taban fiyatı (tek adet)
+  const TOPPING_PRICE = 5;     // topping birim fiyatı (tek adet)
 
   const [formData, setFormData] = useState({
     boyut: "",
@@ -27,7 +29,10 @@ export default function OrderPizza() {
     malzemeler: [],
     özel: "",
   });
+
+  // Adet kontrolü
   const [adet, setAdet] = useState(1);
+
   const [hata, setHata] = useState("");
 
   const malzemeListesi = [
@@ -39,14 +44,18 @@ export default function OrderPizza() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     if (type === "checkbox") {
       let yeni = [...formData.malzemeler];
+
       if (checked) {
+        // Maksimum 10 kontrolü + yineleneni ekleme
         if (yeni.length >= 10) return;
         if (!yeni.includes(value)) yeni.push(value);
       } else {
         yeni = yeni.filter((m) => m !== value);
       }
+
       setFormData((s) => ({ ...s, malzemeler: yeni }));
     } else {
       setFormData((s) => ({ ...s, [name]: value }));
@@ -56,6 +65,7 @@ export default function OrderPizza() {
   const azalt = () => setAdet((a) => Math.max(1, a - 1));
   const arttir = () => setAdet((a) => a + 1);
 
+  // ✅ Min 4, Max 10 şartı + boyut/hamur zorunlu
   const formGecerliMi =
     formData.boyut &&
     formData.hamur &&
@@ -64,14 +74,36 @@ export default function OrderPizza() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formGecerliMi) return;
+    if (!formGecerliMi) {
+      if (formData.malzemeler.length < 4) {
+        setHata("En az 4 malzeme seçmelisiniz.");
+      }
+      return;
+    }
 
     const payload = { ...formData, adet };
+
     axios
       .post("https://reqres.in/api/pizza", payload, {
         headers: { "x-api-key": "reqres-free-v1" },
       })
-      .then(() => navigate("/success"))
+      .then(() => {
+        // ✅ Success sayfasına state ile verileri gönder
+        navigate("/success", {
+          state: {
+            urunAdi: "Position Absolute Acı Pizza",
+            boyut: formData.boyut,
+            hamur: formData.hamur,
+            malzemeler: formData.malzemeler,
+            adet,
+            fiyatlar: {
+              pizzaTutari,     // "85.50" gibi (string)
+              toppingsTutari,  // "25.00" gibi (string)
+              toplamFiyat,     // "110.50" gibi (string)
+            },
+          },
+        });
+      })
       .catch(() => setHata("Sipariş gönderilirken bir hata oluştu."));
   };
 
@@ -80,6 +112,7 @@ export default function OrderPizza() {
     [formData.malzemeler.length]
   );
 
+  // Ara hesaplar
   const pizzaTutari = useMemo(
     () => (BASE_PRICE * adet).toFixed(2),
     [adet]
@@ -92,12 +125,13 @@ export default function OrderPizza() {
 
   const toplamFiyat = useMemo(() => {
     const perPizza = BASE_PRICE + formData.malzemeler.length * TOPPING_PRICE;
-    return (perPizza * adet).toFixed(2);
+    const total = perPizza * adet;
+    return total.toFixed(2);
   }, [formData.malzemeler.length, adet]);
 
   return (
     <div className="order-container">
-
+      {/* Kırmızı alan (logo + breadcrumb) */}
       <header className="order-header">
         <div className="order-header-inner">
           <img src={logo} alt="Teknolojik Yemekler Logo" className="logo" />
@@ -107,15 +141,17 @@ export default function OrderPizza() {
         </div>
       </header>
 
-
+      {/* Form */}
       <form className="order-form" onSubmit={handleSubmit}>
         <h2 className="pizza-title">Position Absolute Pizza</h2>
+
         <div className="pizza-info-row">
           <div className="pizza-price">85.50₺</div>
           <div className="pizza-rating">
             <span className="star">★</span> 4.9 <span className="muted">(200)</span>
           </div>
         </div>
+
         <p className="pizza-description">
           Frontend Dev olarak hâlâ position:absolute kullanıyorsan bu çok acı pizza tam sana göre.
           Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak
@@ -123,13 +159,15 @@ export default function OrderPizza() {
           buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.
         </p>
 
-
         <div className="field-row">
           <div className="field field--stack">
             <label className="field-label">Boyut Seçin</label>
             <div className="radio-group radio-group--vertical">
               {["Küçük", "Orta", "Büyük"].map((boyut) => (
-                <label key={boyut} className={`radio-chip ${formData.boyut === boyut ? "active" : ""}`}>
+                <label
+                  key={boyut}
+                  className={`radio-chip ${formData.boyut === boyut ? "active" : ""}`}
+                >
                   <input
                     type="radio"
                     name="boyut"
@@ -142,6 +180,7 @@ export default function OrderPizza() {
               ))}
             </div>
           </div>
+
           <div className="field">
             <label htmlFor="hamur" className="field-label">Hamur Kalınlığı</label>
             <select
@@ -152,7 +191,7 @@ export default function OrderPizza() {
               className="select-input"
             >
               <option value="" disabled>Seçiniz</option>
-              <option value="İnce">İnce</option>
+              <option value="İnce">Ince</option>
               <option value="Normal">Normal</option>
               <option value="Kalın Kenar">Kalın Kenar</option>
             </select>
@@ -164,6 +203,7 @@ export default function OrderPizza() {
             <label className="field-label">Malzemeler - 5 TL</label>
             <small className="helper">En az 4, en fazla 10 malzeme seçebilirsiniz • {secimSayaci}</small>
           </div>
+
           <div className="malzemeler-grid">
             {malzemeListesi.map((m, i) => {
               const checked = formData.malzemeler.includes(m);
@@ -184,7 +224,6 @@ export default function OrderPizza() {
           </div>
         </div>
 
- 
         <div className="field">
           <label htmlFor="özel" className="field-label">Ek Not</label>
           <textarea
@@ -192,7 +231,7 @@ export default function OrderPizza() {
             name="özel"
             value={formData.özel}
             onChange={handleChange}
-            placeholder="Özel istek varsa giriniz"
+            placeholder="Siparişinizle ilgili özel bir notunuz var mı?"
           />
         </div>
 
@@ -205,6 +244,7 @@ export default function OrderPizza() {
             <span className="qty-value">{adet}</span>
             <button type="button" className="qty-btn" onClick={arttir} aria-label="Arttır">+</button>
           </div>
+
           <div className="summary-right">
             <div className="summary-row">
               <span>Pizza Fiyatı</span>
@@ -221,7 +261,6 @@ export default function OrderPizza() {
           </div>
         </div>
 
-
         <div className="submit-wrap">
           <button type="submit" disabled={!formGecerliMi} className="cta-btn">
             Siparişi Onayla
@@ -229,6 +268,7 @@ export default function OrderPizza() {
         </div>
       </form>
 
+      {/* FOOTER */}
       <footer className="site-footer">
         <div className="container footer-grid">
           <div className="f-brand">
@@ -239,6 +279,7 @@ export default function OrderPizza() {
               <li><img src={iconPhone} alt="" /> +90 216 123 45 67</li>
             </ul>
           </div>
+
           <div className="f-links">
             <h4>Sıcacık Menüler</h4>
             <ul>
@@ -250,6 +291,7 @@ export default function OrderPizza() {
               <li>Position Absolute Acı Burger</li>
             </ul>
           </div>
+
           <div className="f-ig">
             <h4>Instagram</h4>
             <div className="ig-grid">
@@ -267,5 +309,3 @@ export default function OrderPizza() {
     </div>
   );
 }
-
-
