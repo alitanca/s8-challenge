@@ -1,6 +1,6 @@
 describe("Pizza Uygulaması E2E", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:5173");
+    cy.visit("http://localhost:5174");
   });
 
   it("Home: hero başlığı görünür ve orta kart tıklanınca order sayfasına gider", () => {
@@ -12,7 +12,7 @@ describe("Pizza Uygulaması E2E", () => {
   });
 
   it("Order: en az 4 malzeme kuralı; 3 seçiliyken disabled, 4. ile enabled", () => {
-    cy.visit("http://localhost:5173/order-pizza");
+    cy.visit("http://localhost:5174/order-pizza");
 
 
     cy.contains(".radio-chip", "Küçük").click();
@@ -36,7 +36,7 @@ describe("Pizza Uygulaması E2E", () => {
       body: { id: 1 },
     }).as("postPizza");
 
-    cy.visit("http://localhost:5173/order-pizza");
+    cy.visit("http://localhost:5174/order-pizza");
 
  
     cy.contains(".radio-chip", "Büyük").click();
@@ -72,6 +72,6 @@ describe("Pizza Uygulaması E2E", () => {
 
    
     cy.get(".home-link").should("contain", "Ana sayfa").click();
-    cy.url().should("eq", "http://localhost:5173/");
+    cy.url().should("eq", "http://localhost:5174/");
   });
 });
