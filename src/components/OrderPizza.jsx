@@ -49,7 +49,7 @@ export default function OrderPizza() {
       let yeni = [...formData.malzemeler];
 
       if (checked) {
-        // Maksimum 10 kontrolü + yineleneni ekleme
+
         if (yeni.length >= 10) return;
         if (!yeni.includes(value)) yeni.push(value);
       } else {
@@ -65,7 +65,7 @@ export default function OrderPizza() {
   const azalt = () => setAdet((a) => Math.max(1, a - 1));
   const arttir = () => setAdet((a) => a + 1);
 
-  // ✅ Min 4, Max 10 şartı + boyut/hamur zorunlu
+
   const formGecerliMi =
     formData.boyut &&
     formData.hamur &&
@@ -88,7 +88,7 @@ export default function OrderPizza() {
         headers: { "x-api-key": "reqres-free-v1" },
       })
       .then(() => {
-        // ✅ Success sayfasına state ile verileri gönder
+
         navigate("/success", {
           state: {
             urunAdi: "Position Absolute Acı Pizza",
@@ -97,10 +97,11 @@ export default function OrderPizza() {
             malzemeler: formData.malzemeler,
             adet,
             fiyatlar: {
-              pizzaTutari,     // "85.50" gibi (string)
-              toppingsTutari,  // "25.00" gibi (string)
-              toplamFiyat,     // "110.50" gibi (string)
+              pizzaTutari,     
+              toppingsTutari, 
+              toplamFiyat,    
             },
+            note: formData.özel,
           },
         });
       })

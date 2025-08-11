@@ -35,6 +35,7 @@ export default function Success() {
             {malzemeler.length ? malzemeler.join(", ") : "-"}
           </p>
           <p><span className="label">Adet:</span> {adet}</p>
+          <p><span className="label">Notunuz:</span> {state?.note || "-"}</p>
         </div>
 
         <div className="summary">
